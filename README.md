@@ -32,7 +32,7 @@ This script simulates the charging and discharging process of a capacitor, consi
 ### Example Command
 
 ```sh
-python capacitor_simulation.py --cap "220e-6,370e-6" --r_charging 1000 --v_start 3.3 --v_cutoff 1.8 --total_cycles_required 100000 --total_checkpoint_size 128 --total_restore_size 128 --trace 'RF_2.csv' --mcu 'stm32l152re' --g
+python capsimu.py --cap "220e-6,370e-6" --r_charging 1000 --v_start 3.3 --v_cutoff 1.8 --total_cycles_required 100000 --total_checkpoint_size 128 --total_restore_size 128 --trace 'RF_2.csv' --mcu 'stm32l152re' --g
 ```
 
 
