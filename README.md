@@ -56,6 +56,9 @@ python capacitor_simulation.py --cap "220e-6,470e-6" --r_charging 1000 --v_start
 
    If the `--g` flag is set, graphs will be generated for each capacitor value, showing the voltage traces and capacitor voltage.
 
+   ![Alt text](/docs/screenshots/Figure_1.png?raw=true "Optional Title")
+   ![Alt text](/docs/screenshots/Figure_2.png?raw=true "Optional Title")
+
 ## License
 
 This project is licensed under the MIT License - see the LICENSE.md file for details.
