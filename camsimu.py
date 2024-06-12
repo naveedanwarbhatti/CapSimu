@@ -1,6 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
+import json 
 import argparse
 
 def parse_args():
@@ -16,6 +17,7 @@ def parse_args():
     parser.add_argument("--trace", type=str, default='traces/RF_2.csv', help="CSV file path for voltage values (default: '\traces\RF_2.csv')")
     parser.add_argument("--mcu", type=str, default="stm32l152re", help="MCU name for the experiment (e.g., stm32l152re)")
     parser.add_argument("--g", action='store_true', help="Generate graphs if this flag is set")
+    parser.add_argument("-j", "--json", action='store_true', help="Output results in JSON format if this flag is set")
 
     return parser.parse_args()
 
@@ -107,15 +109,26 @@ def simulate_for_capacitor(C):
 
         voltage[i] = V
 
-    print(f"Results for Capacitance: {C} F")
-    print(f"Checkpointing Voltage Threshold: {V_check_thres} V")
-    print(f"Total energy consumed: {total_energy_consumed} Joules")
-    print(f"Total energy required: {total_cycles_required * energy_per_cycle} Joules")
-    if total_energy_consumed >= total_cycles_required * energy_per_cycle:
-        print(f"Total number of checkpoints: {checkpoint_count}")
+    if args.json:
+        results = {
+            "Capacitance": float(C),  # Ensure C is a standard Python float
+            "Checkpointing Voltage Threshold": float(V_check_thres),  # Convert to float
+            "Total energy consumed": float(total_energy_consumed),  # Convert to float
+            "Total energy required": float(total_cycles_required * energy_per_cycle),  # Convert to float
+            "Total number of checkpoints": int(checkpoint_count) if total_energy_consumed >= total_cycles_required * energy_per_cycle else "N/A",
+            "Execution completed": bool(total_energy_consumed >= total_cycles_required * energy_per_cycle)  # Convert to bool
+        }
+        print(json.dumps(results, indent=4))
     else:
-        print("Application execution not completed")
-    print("-------")
+        print(f"Results for Capacitance: {C} F")
+        print(f"Checkpointing Voltage Threshold: {V_check_thres} V")
+        print(f"Total energy consumed: {total_energy_consumed} Joules")
+        print(f"Total energy required: {total_cycles_required * energy_per_cycle} Joules")
+        if total_energy_consumed >= total_cycles_required * energy_per_cycle:
+            print(f"Total number of checkpoints: {checkpoint_count}")
+        else:
+            print("Application execution not completed")
+        print("-------")
 
     # Plotting the graph only if --g flag is set
     if args.g:
