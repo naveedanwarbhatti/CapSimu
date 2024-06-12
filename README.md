@@ -67,6 +67,68 @@ Total number of checkpoints: 0
    ![Alt text](/docs/screenshots/Figure_2.png?raw=true "Optional Title")
    ![Alt text](/docs/screenshots/Figure_3.png?raw=true "Optional Title")
 
+
+Here’s a sample documentation section for your GitHub repository that describes the `--json` flag, along with the example input command and the expected JSON output format. You can include this in your README or documentation file to help users understand how to use this feature.
+
+---
+
+## JSON Output Feature
+
+The `--json` flag enables the output of simulation results in JSON format. This can be particularly useful for integrating these results into data analysis pipelines or when automating multiple simulations for batch processing.
+
+### Usage
+
+To enable JSON output, add the `--json` flag at the end of your command line arguments when running the simulation. Below is an example command with multiple configurations:
+
+```bash
+python capsimu.py --cap "220e-6,330e-6,470e-6" --r_charging 1000 --v_start 3.3 --v_cutoff 1.8 --total_cycles_required 100000 --total_checkpoint_size 128 --total_restore_size 128 --trace '/traces/RF_2.csv' --mcu 'stm32l152re' --json
+```
+
+### Expected JSON Output
+
+The JSON output format provides detailed results for each capacitor size specified in the `--cap` argument. Each block of JSON data includes:
+
+- **Capacitance**: The capacitance value used in the simulation.
+- **Checkpointing Voltage Threshold**: The calculated voltage threshold for checkpointing.
+- **Total energy consumed**: The total energy consumed during the simulation.
+- **Total energy required**: The total energy requirement calculated based on the number of cycles and per cycle energy consumption.
+- **Total number of checkpoints**: The number of checkpoints that occurred during the simulation.
+- **Execution completed**: A boolean indicating whether the application execution requirements were met.
+
+### Example Output
+
+```json
+{
+    "Capacitance": 0.00022,
+    "Checkpointing Voltage Threshold": 3.285897137769227,
+    "Total energy consumed": 6.785915860118819e-05,
+    "Total energy required": 6.43125e-05,
+    "Total number of checkpoints": 4,
+    "Execution completed": true
+}
+{
+    "Capacitance": 0.00033,
+    "Checkpointing Voltage Threshold": 2.8771652715824305,
+    "Total energy consumed": 0.00043187257008001827,
+    "Total energy required": 6.43125e-05,
+    "Total number of checkpoints": 0,
+    "Execution completed": true
+}
+{
+    "Capacitance": 0.00047,
+    "Checkpointing Voltage Threshold": 2.6033392631673915,
+    "Total energy consumed": 0.000969807619464742,
+    "Total energy required": 6.43125e-05,
+    "Total number of checkpoints": 0,
+    "Execution completed": true
+}
+```
+
+This output is ideal for logging, automated parsing, or for use in subsequent automated systems. Ensure that your runtime environment supports Python's JSON capabilities to utilize this feature effectively.
+
+---
+
+
 ## License
 
 This project is licensed under the MIT License - see the LICENSE.md file for details.
