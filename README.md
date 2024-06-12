@@ -32,7 +32,7 @@ This script simulates the charging and discharging process of a capacitor, consi
 ### Example Command
 
 ```sh
-python capacitor_simulation.py --cap "220e-6,470e-6" --r_charging 1000 --v_start 3.3 --v_cutoff 1.8 --total_cycles_required 100000 --total_checkpoint_size 128 --total_restore_size 128 --trace 'RF_2.csv' --mcu 'stm32l152re' --g
+python capsimu.py --cap "220e-6,370e-6" --r_charging 1000 --v_start 3.3 --v_cutoff 1.8 --total_cycles_required 100000 --total_checkpoint_size 128 --total_restore_size 128 --trace '/traces/RF_2.csv' --mcu 'stm32l152re' --g
 ```
 
 
@@ -41,20 +41,24 @@ python capacitor_simulation.py --cap "220e-6,470e-6" --r_charging 1000 --v_start
    The script will output the results for each capacitor value provided:
 
    ```
-   Results for Capacitance: 2.2e-05 F
-   Checkpointing Voltage Threshold: 0.014340325153947708 V
-   Total energy consumed: 0.002825661846 Joules
-   Total energy required: 0.002825661846 Joules
-   Total number of checkpoints: 10
-   ------
-   Results for Capacitance: 4.7e-05 F
-   Checkpointing Voltage Threshold: 0.010123234424095573 V
-   Total energy consumed: 0.004325661846 Joules
-   Total energy required: 0.004325661846 Joules
-   Total number of checkpoints: 15
+   Results for Capacitance: 0.00022 F
+Checkpointing Voltage Threshold: 3.285897137769227 V
+Total energy consumed: 6.785915860118819e-05 Joules
+Total energy required: 6.43125e-05 Joules
+Total number of checkpoints: 4
+-------
+Results for Capacitance: 0.00037 F
+Checkpointing Voltage Threshold: 2.7809032170686385 V
+Total energy consumed: 0.0005858535638146365 Joules
+Total energy required: 6.43125e-05 Joules
+Total number of checkpoints: 0
+-------
    ```
 
    If the `--g` flag is set, graphs will be generated for each capacitor value, showing the voltage traces and capacitor voltage.
+
+   ![Alt text](/docs/screenshots/Figure_1.png?raw=true "Optional Title")
+   ![Alt text](/docs/screenshots/Figure_2.png?raw=true "Optional Title")
 
 ## License
 
