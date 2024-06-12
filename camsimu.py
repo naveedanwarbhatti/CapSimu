@@ -13,7 +13,7 @@ def parse_args():
     parser.add_argument("--total_cycles_required", type=int, default=100000, help="Total cycles required by the application (default: 100000 cycles)")
     parser.add_argument("--total_checkpoint_size", type=int, default=128, help="Total bytes required by the checkpoint in bytes (default: 128 bytes)")
     parser.add_argument("--total_restore_size", type=int, default=128, help="Total bytes required by the restore in bytes (default: 128 bytes)")
-    parser.add_argument("--trace", type=str, default='\traces\RF_2.csv', help="CSV file path for voltage values (default: '\traces\RF_2.csv')")
+    parser.add_argument("--trace", type=str, default='traces/RF_2.csv', help="CSV file path for voltage values (default: '\traces\RF_2.csv')")
     parser.add_argument("--mcu", type=str, default="stm32l152re", help="MCU name for the experiment (e.g., stm32l152re)")
     parser.add_argument("--g", action='store_true', help="Generate graphs if this flag is set")
 
@@ -126,19 +126,25 @@ def simulate_for_capacitor(C):
         # Adding vertical lines for V_discharge_start and V_cutoff
         plt.axhline(y=V_discharge_start, color='#48A300', linestyle='dotted')
         plt.axhline(y=V_cutoff, color='#B82100', linestyle='dotted')
+        plt.axhline(y=V_check_thres, color='#B748FF', linestyle='dotted')
 
         # Adding text labels for the lines
         plt.text(x=0.1, y=V_discharge_start + 0.04, s='Startup Voltage', color='black', verticalalignment='bottom', fontsize=8)
-        plt.text(x=0.1, y=V_cutoff + 0.04, s='Minimum Operating Voltage', color='black', verticalalignment='bottom', fontsize=8)
+        plt.text(x=0.1, y=V_cutoff - 0.5, s='Minimum Operating Voltage', color='black', verticalalignment='bottom', fontsize=8)
+        plt.text(x=0.1, y=V_check_thres - 0.5, s='Checkpointing Threshold', color='black', verticalalignment='bottom', fontsize=8)
 
         # Adding orange vertical lines at each discharge point
         label_added = False
-        for t in charging_states:
+        for idx, t in enumerate(charging_states):
             if not label_added:
                 plt.axvline(x=t, color='#F07100', linestyle='--', linewidth=1, label='Checkpoint Location')
+                plt.text(x=t, y=plt.ylim()[1] * -0.08, s=str(idx + 1), color='black', verticalalignment='top',
+                     horizontalalignment='center', fontsize=8)
                 label_added = True
             else:
                 plt.axvline(x=t, color='#F07100', linestyle='--', linewidth=1)
+                plt.text(x=t, y=plt.ylim()[1] * -0.08, s=str(idx + 1), color='black', verticalalignment='top',
+                     horizontalalignment='center', fontsize=8)
 
         plt.xlabel('Time (s)')
         plt.ylabel('Voltage (V)')
