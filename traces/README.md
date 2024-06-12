@@ -1,6 +1,6 @@
 The RF traces are taken form [MSPSim](https://github.com/ransford/mspsim/tree/mementos/traces).
 
-Each line in each trace looks like this: <time> <voltage>
+Each line in each trace looks like this: \<time\> \<voltage\>
 
 The <time> field starts at an arbitrary number and counts milliseconds.  The <voltage> field is just voltage in volts.
 
