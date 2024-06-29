@@ -26,13 +26,13 @@ This script simulates the charging and discharging process of a capacitor, consi
 - `--total_checkpoint_size`: Total bytes required by the checkpoint in bytes. Default: `128`.
 - `--total_restore_size`: Total bytes required by the restore in bytes. Default: `128`.
 - `--trace`: CSV file path for voltage values. Default: `'RF_2.csv'`.
-- `--mcu`: MCU name for the experiment (e.g., `stm32l152re`). Default: `"stm32l152re"`.
+- `--mcu`: MCU name for the experiment (e.g., `stm32l152re_32Mhz`). Default: `"stm32l152re_32Mhz"`.
 - `--g`: Generate graphs if this flag is set.
 
 ### Example Command
 
 ```sh
-python capsimu.py --cap "220e-6,330e-6,470e-6" --r_charging 1000 --v_start 3.3 --v_cutoff 1.8 --total_cycles_required 100000 --total_checkpoint_size 128 --total_restore_size 128 --trace '/traces/RF_2.csv' --mcu 'stm32l152re' --g
+python capsimu.py --cap "220e-6,330e-6,470e-6" --r_charging 1000 --v_start 3.3 --v_cutoff 1.8 --total_cycles_required 100000 --total_checkpoint_size 128 --total_restore_size 128 --trace '/traces/RF_2.csv' --mcu 'stm32l152re_32Mhz' --g
 ```
 
 
@@ -81,7 +81,7 @@ The `--json` flag enables the output of simulation results in JSON format. This 
 To enable JSON output, add the `--json` flag at the end of your command line arguments when running the simulation. Below is an example command with multiple configurations:
 
 ```bash
-python capsimu.py --cap "220e-6,330e-6,470e-6" --r_charging 1000 --v_start 3.3 --v_cutoff 1.8 --total_cycles_required 100000 --total_checkpoint_size 128 --total_restore_size 128 --trace '/traces/RF_2.csv' --mcu 'stm32l152re' --json
+python capsimu.py --cap "220e-6,330e-6,470e-6" --r_charging 1000 --v_start 3.3 --v_cutoff 1.8 --total_cycles_required 100000 --total_checkpoint_size 128 --total_restore_size 128 --trace '/traces/RF_2.csv' --mcu 'stm32l152re_32Mhz' --json
 ```
 
 ### Expected JSON Output
