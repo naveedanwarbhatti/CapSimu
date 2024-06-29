@@ -15,7 +15,7 @@ def parse_args():
     parser.add_argument("--total_checkpoint_size", type=int, default=128, help="Total bytes required by the checkpoint in bytes (default: 128 bytes)")
     parser.add_argument("--total_restore_size", type=int, default=128, help="Total bytes required by the restore in bytes (default: 128 bytes)")
     parser.add_argument("--trace", type=str, default='traces/RF_2.csv', help="CSV file path for voltage values (default: '\traces\RF_2.csv')")
-    parser.add_argument("--mcu", type=str, default="stm32l152re", help="MCU name for the experiment (e.g., stm32l152re)")
+    parser.add_argument("--mcu", type=str, default="stm32l152re_32Mhz", help="MCU name for the experiment (e.g., stm32l152re_32Mhz)")
     parser.add_argument("--g", action='store_true', help="Generate graphs if this flag is set")
     parser.add_argument("-j", "--json", action='store_true', help="Output results in JSON format if this flag is set")
 
